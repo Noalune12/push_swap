@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lbuisson <lbuisson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 16:29:18 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/02 16:34:00 by lbuisson         ###   ########lyon.fr   */
+/*   Created: 2024/11/05 09:34:24 by lbuisson          #+#    #+#             */
+/*   Updated: 2024/11/13 08:25:05 by lbuisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-# include <stdlib.h>
-
-typedef struct s_node
+int	ft_tolower(int c)
 {
-	int		value;
-	void	*prev;
-	void	*next;
-}	t_node;
-
-int	check_args(int ac, char **av);
-
-#endif
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
+	return (c);
+}

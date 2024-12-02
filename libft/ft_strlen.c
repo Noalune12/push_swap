@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lbuisson <lbuisson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 16:29:18 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/02 16:34:00 by lbuisson         ###   ########lyon.fr   */
+/*   Created: 2024/11/04 16:45:42 by lbuisson          #+#    #+#             */
+/*   Updated: 2024/11/04 16:49:16 by lbuisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-
-typedef struct s_node
+size_t	ft_strlen(const char *s)
 {
-	int		value;
-	void	*prev;
-	void	*next;
-}	t_node;
+	size_t	len;
 
-int	check_args(int ac, char **av);
-
-#endif
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}

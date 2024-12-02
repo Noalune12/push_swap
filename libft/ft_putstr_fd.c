@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: lbuisson <lbuisson@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 16:29:18 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/02 16:34:00 by lbuisson         ###   ########lyon.fr   */
+/*   Created: 2024/11/06 12:48:53 by lbuisson          #+#    #+#             */
+/*   Updated: 2024/11/13 08:37:58 by lbuisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-
-typedef struct s_node
+void	ft_putstr_fd(char *s, int fd)
 {
-	int		value;
-	void	*prev;
-	void	*next;
-}	t_node;
+	size_t	i;
 
-int	check_args(int ac, char **av);
-
-#endif
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+}
