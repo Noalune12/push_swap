@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:07 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/02 18:36:11 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/03 08:21:26 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	print_stack(t_node *stack, char c)
 	temp = stack;
 	while (temp)
 	{
-		ft_printf("stack %c = %d\n", c, temp->value);
+		ft_printf("stack %c = %d // prev : %p, next : %p\n", c, temp->value, temp->prev, temp->next);
 		temp = temp->next;
 	}
 }
@@ -108,6 +108,9 @@ int	main(int argc, char **argv)
 	print_stack(stack_b, 'b');
 	ft_printf("\n\nrotate a\n\n");
 	rotate_a_or_b(&stack_a);
+	print_stack(stack_a, 'a');
+	ft_printf("\n\nreverse a\n\n");
+	reverse_a_or_b(&stack_a);
 	print_stack(stack_a, 'a');
 	// printf("stack a = %d\n", stack_a->value);
 	// while (stack_a->prev)
