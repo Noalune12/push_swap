@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:07 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/03 08:21:26 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/03 11:10:11 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,22 @@ void	print_stack(t_node *stack, char c)
 	}
 }
 
+int	get_stack_size(t_node *stack)
+{
+	int	size;
+	t_node *current;
+
+	size = 0;
+	current = stack;
+	while (current)
+	{
+		size++;
+		current = current->next;
+	}
+	return (size);
+}
+
+
 #include <stdio.h>
 
 int	main(int argc, char **argv)
@@ -86,32 +102,43 @@ int	main(int argc, char **argv)
 	// check error -> if not a number, not included in int, or double ?? string with numbers separated with space ??
 	if (check_args(argc, argv) != 1)
 	{
-		ft_printf("Error\n");
+		//ft_printf("Error\n");
+		ft_putendl_fd("Error", 2);
 		return (1);
 	}
 	i = 0;
 	while (++i < argc)
 		push_stack(&stack_a, ft_atoi(argv[i]));
 	print_stack(stack_a, 'a');
-	ft_printf("\n\nswap a\n\n");
-	swap_a_and_b(&stack_a, &stack_b);
-	print_stack(stack_a, 'a');
-	ft_printf("\n\npush b\n\n");
-	push_on_top(&stack_b, &stack_a);
+	// ft_printf("\n\nswap a\n\n");
+	// swap_a_and_b(&stack_a, &stack_b);
+	// print_stack(stack_a, 'a');
+	// ft_printf("\n\npush b\n\n");
+	// push_on_top(&stack_b, &stack_a);
+	// print_stack(stack_a, 'a');
+	// ft_printf("\n\n");
+	// print_stack(stack_b, 'b');
+	// ft_printf("\n\npush a\n\n");
+	// push_on_top(&stack_a, &stack_b);
+	// print_stack(stack_a, 'a');
+	// ft_printf("\n\n");
+	// print_stack(stack_b, 'b');
+	// ft_printf("\n\nrotate a\n\n");
+	// rotate_a_or_b(&stack_a);
+	// print_stack(stack_a, 'a');
+	// ft_printf("\n\nreverse a\n\n");
+	// reverse_a_or_b(&stack_a);
+	// print_stack(stack_a, 'a');
+	ft_printf("\n\npartition\n\n");
+	partition(&stack_a, &stack_b, stack_a->value, get_stack_size(stack_a));
 	print_stack(stack_a, 'a');
 	ft_printf("\n\n");
 	print_stack(stack_b, 'b');
-	ft_printf("\n\npush a\n\n");
-	push_on_top(&stack_a, &stack_b);
+	ft_printf("\n\npartition\n\n");
+	partition(&stack_b, &stack_a, stack_b->value, get_stack_size(stack_b));
 	print_stack(stack_a, 'a');
 	ft_printf("\n\n");
 	print_stack(stack_b, 'b');
-	ft_printf("\n\nrotate a\n\n");
-	rotate_a_or_b(&stack_a);
-	print_stack(stack_a, 'a');
-	ft_printf("\n\nreverse a\n\n");
-	reverse_a_or_b(&stack_a);
-	print_stack(stack_a, 'a');
 	// printf("stack a = %d\n", stack_a->value);
 	// while (stack_a->prev)
 	// {

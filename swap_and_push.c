@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   swap_and_push.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/03 08:43:02 by lbuisson          #+#    #+#             */
+/*   Updated: 2024/12/03 08:44:02 by lbuisson         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	swap_a_or_b(t_node **stack) //simplify ??
@@ -19,7 +31,6 @@ void	swap_a_and_b(t_node **stack_a, t_node **stack_b)
 	swap_a_or_b(stack_b);
 }
 
-
 void	addfront_stack(t_node **stack, int value)
 {
 	t_node	*new_node;
@@ -40,6 +51,7 @@ void	addfront_stack(t_node **stack, int value)
 	}
 	*stack = new_node;
 }
+
 void	push_on_top(t_node **stack_push, t_node **stack_pull)
 {
 	t_node	*temp;
