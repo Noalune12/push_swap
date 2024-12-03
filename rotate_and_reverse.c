@@ -6,11 +6,12 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 08:43:31 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/03 11:29:08 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/03 11:48:05 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/ft_printf/ft_printf.h"
 
 void	rotate_a_or_b(t_node **stack)
 {

@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:18 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/03 10:59:49 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/03 13:42:18 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,8 @@ void	free_stack(t_node **stack);
 void	rotate_a_or_b(t_node **stack);
 void	reverse_a_or_b(t_node **stack);
 void	partition(t_node **stack_a, t_node **stack_b, int pivot, int size);
+void	quick_sort(t_node **stack_a, t_node **stack_b);
+int		get_stack_size(t_node *stack);
+void	print_stack(t_node *stack, char c);
 
 #endif

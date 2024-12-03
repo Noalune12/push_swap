@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:07 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/03 11:10:11 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/03 13:56:44 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,16 +129,21 @@ int	main(int argc, char **argv)
 	// ft_printf("\n\nreverse a\n\n");
 	// reverse_a_or_b(&stack_a);
 	// print_stack(stack_a, 'a');
-	ft_printf("\n\npartition\n\n");
-	partition(&stack_a, &stack_b, stack_a->value, get_stack_size(stack_a));
-	print_stack(stack_a, 'a');
-	ft_printf("\n\n");
-	print_stack(stack_b, 'b');
-	ft_printf("\n\npartition\n\n");
-	partition(&stack_b, &stack_a, stack_b->value, get_stack_size(stack_b));
-	print_stack(stack_a, 'a');
-	ft_printf("\n\n");
-	print_stack(stack_b, 'b');
+	// ft_printf("\n\npartition\n\n");
+	// partition(&stack_a, &stack_b, stack_a->value, get_stack_size(stack_a));
+	// print_stack(stack_a, 'a');
+	// ft_printf("\n\n");
+	// print_stack(stack_b, 'b');
+	// ft_printf("\n\npartition\n\n");
+	// partition(&stack_b, &stack_a, stack_b->value, get_stack_size(stack_b));
+	// print_stack(stack_a, 'a');
+	// ft_printf("\n\n");
+	// print_stack(stack_b, 'b');
+	quick_sort(&stack_a, &stack_b);
+	// quick_sort(&stack_a, &stack_b);
+	// quick_sort(&stack_a, &stack_b);
+	// quick_sort(&stack_a, &stack_b);
+	// quick_sort(&stack_a, &stack_b);
 	// printf("stack a = %d\n", stack_a->value);
 	// while (stack_a->prev)
 	// {
