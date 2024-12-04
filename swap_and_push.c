@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 08:43:02 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/04 14:04:09 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/04 18:07:25 by lbuisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	swap_a_and_b(t_node **stack_a, t_node **stack_b)
 	swap_a_or_b(stack_b, 'b', 1);
 }
 
-void	addfront_stack(t_node **stack, int value)
+static void	addfront_stack(t_node **stack, int value)
 {
 	t_node	*new_node;
 

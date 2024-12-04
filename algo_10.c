@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
 
-int	get_index_min(t_node *stack_a)
+static int	get_index_min(t_node *stack_a)
 {
 	t_node	*temp;
 	int		index;
@@ -25,7 +25,7 @@ int	get_index_min(t_node *stack_a)
 	return (min_index);
 }
 
-void	push_min_up(t_node **stack_a)
+static void	push_min_up(t_node **stack_a)
 {
 	int	index;
 	int	proximity;

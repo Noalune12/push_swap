@@ -16,42 +16,53 @@ static int	check_double(t_node *stack_a, int nb)
 	return (1);
 }
 
-static int	check_int(char *str, t_node **stack_a) //accept all whitespace ??
+static int	validate_and_convert(char *str, size_t *index, t_node **stack_a)
 {
-	int				sign;
-	long			res;
-	size_t			i;
+	long	res;
+	int		sign;
+
+	res = 0;
+	sign = 1;
+	if (str[*index] == '-' || str[*index] == '+')
+	{
+		if (str[*index] == '-')
+			sign = -1;
+		(*index)++;
+	}
+	if (!(str[*index] >= '0' && str[*index] <= '9'))
+		return (-1);
+	while (str[*index] >= '0' && str[*index] <= '9')
+	{
+		res = res * 10 + (str[*index] - '0');
+		if (res * sign < INT_MIN || res * sign > INT_MAX)
+			return (-1);
+		(*index)++;
+	}
+	res *= sign;
+	if (check_double(*stack_a, res) == -1)
+		return (-1);
+	push_stack(stack_a, res);
+	return (1);
+}
+
+static int	check_int(char *str, t_node **stack_a)
+{
+	size_t	i;
 
 	i = 0;
 	while (str[i])
 	{
-		sign = 1;
-		res = 0;
-		if (str[i] == '-' || str[i] == '+')
-		{
-			if (str[i] == '-')
-				sign = -sign;
+		while (str[i] == ' ')
 			i++;
-		}
-		while (str[i] >= '0' && str[i] <= '9')
-		{
-			res = res * 10 + str[i] - '0';
-			i++;
-		}
-		if (str[i] != ' ' && str[i])
+		if (str[i] && validate_and_convert(str, &i, stack_a) != 1)
 			return (-1);
-		res = res * sign;
-		if (res < INT_MIN || res > INT_MAX || check_double(*stack_a, res) == -1)
+		if (str[i] && str[i] != ' ')
 			return (-1);
-		push_stack(stack_a, res);
-		if (!str[i])
-			return (1);
-		i++;
 	}
 	return (1);
 }
 
-static int	check_error(int ac, char **av, t_node **stack_a)
+int	check_error(int ac, char **av, t_node **stack_a)
 {
 	size_t	i;
 
@@ -59,17 +70,20 @@ static int	check_error(int ac, char **av, t_node **stack_a)
 	while (++i < ac)
 	{
 		if (check_int(av[i], stack_a) != 1)
+		{
+			free_stack(stack_a);
 			return (-1);
+		}
 	}
 	return (1);
 }
 
-int	check_args(int ac, char **av, t_node **stack_a)
-{
-	if (check_error(ac, av, stack_a) != 1)
-	{
-		free_stack(stack_a);
-		return (-1);
-	}
-	return (1);
-}
+// int	check_args(int ac, char **av, t_node **stack_a)
+// {
+// 	if (check_error(ac, av, stack_a) != 1)
+// 	{
+// 		free_stack(stack_a);
+// 		return (-1);
+// 	}
+// 	return (1);
+// }
