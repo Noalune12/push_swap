@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:07 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/03 13:56:44 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/04 14:09:22 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	get_stack_size(t_node *stack)
 	int	size;
 	t_node *current;
 
+	if (!stack)
+		return (0);
 	size = 0;
 	current = stack;
 	while (current)
@@ -109,7 +111,41 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (++i < argc)
 		push_stack(&stack_a, ft_atoi(argv[i]));
-	print_stack(stack_a, 'a');
+	//print_stack(stack_a, 'a');
+	if (argc == 3)
+	{
+		sort_2(&stack_a);
+		// ft_printf("\n\nsorted\n\n");
+		// print_stack(stack_a, 'a');
+	}
+	if (argc == 4)
+	{
+		sort_3(&stack_a);
+		// ft_printf("\n\nsorted\n\n");
+		// print_stack(stack_a, 'a');
+	}
+	if (argc >= 5)
+	{
+		sort_10(&stack_a, &stack_b);
+		// ft_printf("\n\nsorted\n\n");
+		// print_stack(stack_a, 'a');
+	}
+	// if (argc >= 5)
+	// {
+	// 	sort_4(&stack_a, &stack_b);
+	// 	ft_printf("\n\nsorted\n\n");
+	// 	print_stack(stack_a, 'a');
+	// 	ft_printf("\n\n");
+	// 	print_stack(stack_b, 'b');
+	// }
+	// if (argc >= 5)
+	// {
+	// 	sort_4(&stack_a, &stack_b);
+	// 	ft_printf("\n\nsorted\n\n");
+	// 	print_stack(stack_a, 'a');
+	// 	ft_printf("\n\n");
+	// 	print_stack(stack_b, 'b');
+	// }
 	// ft_printf("\n\nswap a\n\n");
 	// swap_a_and_b(&stack_a, &stack_b);
 	// print_stack(stack_a, 'a');
@@ -139,7 +175,7 @@ int	main(int argc, char **argv)
 	// print_stack(stack_a, 'a');
 	// ft_printf("\n\n");
 	// print_stack(stack_b, 'b');
-	quick_sort(&stack_a, &stack_b);
+	// quick_sort(&stack_a, &stack_b);
 	// quick_sort(&stack_a, &stack_b);
 	// quick_sort(&stack_a, &stack_b);
 	// quick_sort(&stack_a, &stack_b);
