@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:07 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/04 14:09:22 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/04 17:53:01 by lbuisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,33 +102,33 @@ int	main(int argc, char **argv)
 	if (argc < 2) // Si aucun paramètre n’est spécifié, le programme ne doit rien afficher et rendre l’invite de commande.
 		return (1);
 	// check error -> if not a number, not included in int, or double ?? string with numbers separated with space ??
-	if (check_args(argc, argv) != 1)
+	if (check_args(argc, argv, &stack_a) != 1)
 	{
 		//ft_printf("Error\n");
 		ft_putendl_fd("Error", 2);
 		return (1);
 	}
 	i = 0;
-	while (++i < argc)
-		push_stack(&stack_a, ft_atoi(argv[i]));
+	// while (++i < argc)
+	// 	push_stack(&stack_a, ft_atoi(argv[i]));
 	//print_stack(stack_a, 'a');
-	if (argc == 3)
+	if (get_stack_size(stack_a) == 2)
 	{
 		sort_2(&stack_a);
 		// ft_printf("\n\nsorted\n\n");
 		// print_stack(stack_a, 'a');
 	}
-	if (argc == 4)
+	if (get_stack_size(stack_a) == 3)
 	{
 		sort_3(&stack_a);
 		// ft_printf("\n\nsorted\n\n");
 		// print_stack(stack_a, 'a');
 	}
-	if (argc >= 5)
+	if (get_stack_size(stack_a) >= 4)
 	{
 		sort_10(&stack_a, &stack_b);
-		// ft_printf("\n\nsorted\n\n");
-		// print_stack(stack_a, 'a');
+		//ft_printf("\n\nsorted\n\n");
+		//print_stack(stack_a, 'a');
 	}
 	// if (argc >= 5)
 	// {
@@ -191,3 +191,4 @@ int	main(int argc, char **argv)
 	free_stack(&stack_b);
 	return (0);
 }
+

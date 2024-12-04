@@ -33,9 +33,9 @@ void	push_min_up(t_node **stack_a)
 	index = get_index_min(*stack_a);
 	proximity = get_stack_size(*stack_a) / 2;
 	if (proximity > index)
-		rotate_a_or_b(stack_a);
+		rotate_a_or_b(stack_a, 'a', 0);
 	else
-		reverse_a_or_b(stack_a);
+		reverse_a_or_b(stack_a, 'a', 0);
 }
 
 void	sort_10(t_node **stack_a, t_node **stack_b)

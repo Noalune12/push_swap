@@ -26,7 +26,7 @@ void	sort_3(t_node **stack_a)
 	if ((*stack_a)->value > (*stack_a)->next->value)
 		swap_a_or_b(stack_a, 'a', 0);
 	if ((*stack_a)->next->value > (*stack_a)->next->next->value)
-		reverse_a_or_b(stack_a);
+		reverse_a_or_b(stack_a, 'a', 0);
 	if ((*stack_a)->value > (*stack_a)->next->value)
 		swap_a_or_b(stack_a, 'a', 0);
 }
