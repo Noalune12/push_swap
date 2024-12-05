@@ -38,7 +38,7 @@ static void	push_min_up(t_node **stack_a)
 		reverse_a_or_b(stack_a, 'a', 0);
 }
 
-void	sort_10(t_node **stack_a, t_node **stack_b)
+void	sort_10(t_node **stack_a, t_node **stack_b, int algo)
 {
 	int	index;
 
@@ -58,6 +58,6 @@ void	sort_10(t_node **stack_a, t_node **stack_b)
 		}
     }
 	sort_3(stack_a);
-	while (*stack_b)
+	while (*stack_b && algo == 10)
 		push_on_top(stack_a, stack_b, 'a');
 }

@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:18 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/04 18:12:44 by lbuisson         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:35:31 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	push_stack(t_node **stack, int value);
 int		get_stack_size(t_node *stack); //utils ??
 void	sort_2(t_node **stack);
 void	sort_3(t_node **stack_a);
-void	sort_10(t_node **stack_a, t_node **stack_b);
+void	sort_10(t_node **stack_a, t_node **stack_b, int algo);
 int		is_sorted(t_node *stack); //utils ??
 void	rotate_a_or_b(t_node **stack, char c, int rr);
 void	reverse_a_or_b(t_node **stack, char c, int rrr);

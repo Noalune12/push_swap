@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:07 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/04 18:22:42 by lbuisson         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:52:55 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,21 @@ int	get_stack_size(t_node *stack)
 
 
 #include <stdio.h>
+void	sort_stack(t_node **stack_a, t_node **stack_s);
+int get_key_index(t_node *stack_s, int call);
+void	sort_100(t_node **stack_a, t_node **stack_b, t_node *stack_s, int key_number);
 
 int	main(int argc, char **argv)
 {
 	t_node	*stack_a;
 	t_node	*stack_b;
+	t_node	*stack_s;
 	size_t	i;
+	int		key_number;
 
 	stack_a = NULL;
 	stack_b = NULL;
+	stack_s = NULL;
 	if (argc < 2) // Si aucun paramètre n’est spécifié, le programme ne doit rien afficher et rendre l’invite de commande.
 		return (1);
 	// check error -> if not a number, not included in int, or double ?? string with numbers separated with space ??
@@ -111,25 +117,38 @@ int	main(int argc, char **argv)
 	i = 0;
 	// while (++i < argc)
 	// 	push_stack(&stack_a, ft_atoi(argv[i]));
-	print_stack(stack_a, 'a');
-	if (get_stack_size(stack_a) == 2)
+	// print_stack(stack_a, 'a');
+	// printf("\n\n");
+	sort_stack(&stack_a, &stack_s);
+	while (++i < 4)
 	{
-		sort_2(&stack_a);
-		// ft_printf("\n\nsorted\n\n");
+		key_number = get_key_index(stack_s, i);
+		sort_100(&stack_a, &stack_b, stack_s, key_number);
+		// printf("\n\n");
 		// print_stack(stack_a, 'a');
+		// printf("\n\n");
+		// print_stack(stack_b, 'b');
 	}
-	if (get_stack_size(stack_a) == 3)
-	{
-		sort_3(&stack_a);
-		// ft_printf("\n\nsorted\n\n");
-		// print_stack(stack_a, 'a');
-	}
-	if (get_stack_size(stack_a) >= 4)
-	{
-		sort_10(&stack_a, &stack_b);
-		ft_printf("\n\nsorted\n\n");
-		print_stack(stack_a, 'a');
-	}
+	// printf("\n\n");
+	// print_stack(stack_s, 's');
+	// if (get_stack_size(stack_a) == 2)
+	// {
+	// 	sort_2(&stack_a);
+	// 	// ft_printf("\n\nsorted\n\n");
+	// 	// print_stack(stack_a, 'a');
+	// }
+	// if (get_stack_size(stack_a) == 3)
+	// {
+	// 	sort_3(&stack_a);
+	// 	// ft_printf("\n\nsorted\n\n");
+	// 	// print_stack(stack_a, 'a');
+	// }
+	// if (get_stack_size(stack_a) >= 4)
+	// {
+	// 	sort_10(&stack_a, &stack_b, 10);
+	// 	ft_printf("\n\nsorted\n\n");
+	// 	print_stack(stack_a, 'a');
+	// }
 	// if (argc >= 5)
 	// {
 	// 	sort_4(&stack_a, &stack_b);
@@ -189,6 +208,6 @@ int	main(int argc, char **argv)
 	// printf("stack a prev = %d\n", stack_a->value);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
+	free_stack(&stack_s);
 	return (0);
 }
-
