@@ -2,6 +2,23 @@
 #include "libft/libft.h"
 #include "libft/ft_printf/ft_printf.h"
 
+static void	free_stack(t_node **stack)
+{
+	t_node	*temp;
+	t_node	*temp2;
+
+	if (!stack || !*stack)
+		return ;
+	temp = *stack;
+	while (temp)
+	{
+		temp2 = temp->next;
+		free(temp);
+		temp = temp2;
+	}
+	*stack = NULL;
+}
+
 static int	check_double(t_node *stack_a, int nb)
 {
 	t_node	*temp;

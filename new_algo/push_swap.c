@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:07 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/06 12:28:10 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/06 15:29:47 by lbuisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft/libft.h"
 #include "libft/ft_printf/ft_printf.h"
 
-void	free_stack(t_node **stack)
+static void	free_stack(t_node **stack)
 {
 	t_node	*temp;
 	t_node	*temp2;
@@ -73,7 +73,11 @@ void	update_prev_next(t_node **stack)
 
 	temp = *stack;
 	if (temp->next == NULL)
+	{
+		temp->next = temp;
+		temp->prev =temp;
 		return ;
+	}
 	while (temp->next)
 		temp = temp->next;
 	temp->next = *stack;
@@ -85,31 +89,36 @@ void	print_stack(t_node *stack, char c)
 	t_node	*temp;
 
 	temp = stack;
-	ft_printf("stack %c = %d && index = %d// prev : %p, next : %p\n", c, temp->value, temp->index, temp->prev, temp->next);
+	if (!temp)
+	{
+		ft_printf("STACK %c NULL", c);
+		return ;
+	}
+	ft_printf("stack %c = %d && index = %d // prev : %p, next : %p\n", c, temp->value, temp->index, temp->prev, temp->next);
 	temp = temp->next;
 	while (temp->index != 0)
 	{
-		ft_printf("stack %c = %d && index = %d// prev : %p, next : %p\n", c, temp->value, temp->index, temp->prev, temp->next);
+		ft_printf("stack %c = %d && index = %d // prev : %p, next : %p\n", c, temp->value, temp->index, temp->prev, temp->next);
 		temp = temp->next;
 	}
 }
 
-// int	get_stack_size(t_node *stack)
-// {
-// 	int	size;
-// 	t_node *current;
+int	get_stack_size(t_node *stack)
+{
+	int	size;
+	t_node *current;
 
-// 	if (!stack)
-// 		return (0);
-// 	size = 0;
-// 	current = stack;
-// 	while (current)
-// 	{
-// 		size++;
-// 		current = current->next;
-// 	}
-// 	return (size);
-// }
+	if (!stack)
+		return (0);
+	size = 1;
+	current = stack;
+	while (current->next != stack)
+	{
+		size++;
+		current = current->next;
+	}
+	return (size);
+}
 
 
 #include <stdio.h>
@@ -131,23 +140,26 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	update_prev_next(&stack_a);
-	print_stack(stack_a, 'a');
-	push_on_top(&stack_b, &stack_a, 'b');
-	ft_printf("\n\nsorted\n\n");
-	print_stack(stack_b, 'b');
-	print_stack(stack_a, 'a');
-	// if (get_stack_size(stack_a) == 2)
-	// {
-	// 	sort_2(&stack_a);
-	// 	// ft_printf("\n\nsorted\n\n");
-	// 	// print_stack(stack_a, 'a');
-	// }
-	// if (get_stack_size(stack_a) == 3)
-	// {
-	// 	sort_3(&stack_a);
-	// 	ft_printf("\n\nsorted\n\n");
-	// 	print_stack(stack_a, 'a');
-	// }
+	// print_stack(stack_a, 'a');
+	// ft_printf("\n\nSIZE === %d\n\n", get_stack_size(stack_a));
+	if (get_stack_size(stack_a) == 1)
+	{
+		// ft_printf("\n\nsorted\n\n");
+		// print_stack(stack_a, 'a');
+		return (0);
+	}
+	if (get_stack_size(stack_a) == 2)
+	{
+		sort_2(&stack_a);
+		// ft_printf("\n\nsorted\n\n");
+		// print_stack(stack_a, 'a');
+	}
+	if (get_stack_size(stack_a) == 3)
+	{
+		sort_3(&stack_a);
+		// ft_printf("\n\nsorted\n\n");
+		// print_stack(stack_a, 'a');
+	}
 	// if (get_stack_size(stack_a) >= 4)
 	// {
 	// 	sort_10(&stack_a, &stack_b, 10);

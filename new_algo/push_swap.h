@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:18 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/06 11:55:55 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/06 15:30:55 by lbuisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-int	check_error(int ac, char **av, t_node **stack_a);
+int		check_error(int ac, char **av, t_node **stack_a);
 void	push_stack(t_node **stack, int value);
-void	free_stack(t_node **stack);
 void	swap_a_or_b(t_node **stack, char c, int ss);
 void	push_on_top(t_node **stack_push, t_node **stack_pull, char c);
+void	rotate_a_or_b(t_node **stack, char c, int rr);
+void	reverse_a_or_b(t_node **stack, char c, int rrr);
+void	update_index(t_node **stack);
+void	sort_3(t_node **stack_a);
+void	sort_2(t_node **stack);
 
 #endif

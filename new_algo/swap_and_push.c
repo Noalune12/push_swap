@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 08:43:02 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/06 12:38:00 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/06 15:18:32 by lbuisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 
 void	swap_a_or_b(t_node **stack, char c, int ss)
 {
-	int		temp;
-	t_node	*temp2;
+	int		top_value;
+	t_node	*node2;
 
-	if (!stack || !*stack || !(*stack)->next)
+	if (!stack || !*stack || (*stack)->next == *stack)
 		return ;
 	if (c == 'a' && ss == 0)
 		ft_printf("sa\n");
 	else if (c == 'b' && ss == 0)
 		ft_printf("sb\n");
-	temp = (*stack)->value;
-	temp2 = (*stack)->next;
-	(*stack)->value = temp2->value;
-	temp2->value = temp;
+	top_value = (*stack)->value;
+	node2 = (*stack)->next;
+	(*stack)->value = node2->value;
+	node2->value = top_value;
 }
 
 void	swap_a_and_b(t_node **stack_a, t_node **stack_b)
@@ -62,11 +62,13 @@ void	update_index(t_node **stack)
 {
 	t_node	*temp;
 
+	if (!stack || !(*stack))
+		return ;
 	temp = (*stack);
 	temp->index = 0;
-	if (temp->next->index != 0)
+	if (temp->next != temp)
 		temp = temp->next;
-	while (temp->index != 0)
+	while (temp != *stack)
 	{
 		temp->index = temp->prev->index + 1;
 		temp = temp->next;
@@ -75,56 +77,36 @@ void	update_index(t_node **stack)
 
 void	push_on_top(t_node **stack_push, t_node **stack_pull, char c)
 {
-	t_node	*temp;
-	t_node	*temp2;
+	t_node	*top_pull;
+	t_node	*last_push;
 
-	temp = NULL;
 	if (!stack_pull || !*stack_pull)
 		return ;
-	if (c == 'a')
-		ft_printf("pa\n");
+	top_pull = *stack_pull;
+	if (top_pull->next == top_pull)
+		*stack_pull = NULL;
 	else
-		ft_printf("pb\n");
-	if (!*stack_push)
 	{
-		*stack_push = *stack_pull;
-		if ((*stack_pull)->next->index != 0)
-			temp = (*stack_pull)->next;
-		else
-			(*stack_pull) = NULL;
-		(*stack_push)->next = (*stack_push);
-		(*stack_push)->prev = (*stack_push);
-		(*stack_push)->index = 0;
-		if (temp)
-		{
-			temp2 = temp;
-			if (temp->next->index == 1)
-			{
-				temp->index = 0;
-				temp->prev = temp;
-				temp->next = temp;
-			}
-			else
-			{
-				temp = temp->next;
-				while (temp->index != 1)
-					temp = temp->next;
-				printf("index = %d\n\n", temp->index);
-				temp2->prev = temp;
-				temp->next = temp2;
-				(*stack_pull) = temp2;
-				update_index(stack_pull);
-			}
-		}
+		top_pull->prev->next = top_pull->next;
+		top_pull->next->prev = top_pull->prev;
+		*stack_pull = top_pull->next;
+		update_index(stack_pull);
 	}
-	// temp = (*stack_pull);
-	// addfront_stack(stack_push, temp->value);
-	// if ((*stack_pull)->next)
-	// {
-	// 	(*stack_pull) = (*stack_pull)->next;
-	// 	(*stack_pull)->prev = NULL;
-	// }
-	// else
-	// 	*stack_pull = NULL;
-	// free(temp);
+	if (!*stack_push || !stack_push)
+	{
+		top_pull->next = top_pull;
+		top_pull->prev = top_pull;
+		top_pull->index = 0;
+		*stack_push = top_pull;
+	}
+	else
+	{
+		last_push = (*stack_push)->prev;
+		top_pull->next = *stack_push;
+		top_pull->prev = last_push;
+		last_push->next = top_pull;
+		(*stack_push)->prev = top_pull;
+		(*stack_push) = top_pull;
+		update_index(stack_push);
+	}
 }
