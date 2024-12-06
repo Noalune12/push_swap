@@ -119,11 +119,34 @@ void	sort_100(t_node **stack_a, t_node **stack_b, t_node *stack_s, int key_numbe
 		get_last_node(&temp2);
 		index_next = 0;
 		index_prev = 0;
-		while (temp->value >= key_number)
+
+		print_stack(stack_s, 's');
+		printf("\n\n");
+		while (temp->value >= key_number && temp->next)
+		{
 			temp = temp->next;
-		while ((*stack_a)->value != temp->value)
-			push_number_up(stack_a, temp->value);
+			index_next++;
+		}
+		while (temp2->value >= key_number && temp2->prev)
+		{
+			temp2 = temp2->prev;
+			index_prev++;
+		}
+		printf("index next = %zu vs index prev = %zu\n\n", index_next, index_prev);
+		if (index_next <= index_prev)
+		{
+			while ((*stack_a)->value != temp->value)
+				push_number_up(stack_a, temp->value);
+			printf("index next\n\n");
+
+		}
+		else
+		{
+			while ((*stack_a)->value != temp2->value)
+				push_number_up(stack_a, temp2->value);
+			printf("index prev\n\n");
+		}
 		push_on_top(stack_b, stack_a, 'b');
 	}
-	sort_10(stack_a, stack_b, 100);
+	//sort_10(stack_a, stack_b, 100);
 }
