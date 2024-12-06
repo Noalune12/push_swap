@@ -1,0 +1,143 @@
+int calculate_cost_to_top(t_node *stack, int index)
+{
+    int size = get_stack_size(stack);
+
+    if (index <= size / 2)
+        return index;
+    else
+        return size - index;
+}
+
+int find_target_position(t_node *stack_b, int value)
+{
+    t_node *current = stack_b;
+    int position = 0;
+    int size = get_stack_size(stack_b);
+
+    if (!stack_b)
+        return 0;
+
+    while (position < size)
+    {
+        if (current->value > value && current->prev->value < value)
+            return position;
+        position++;
+        current = current->next;
+    }
+
+    return 0;
+}
+
+void calculate_costs(t_node *stack_a, t_node *stack_b, int *costs)
+{
+    t_node *current = stack_a;
+    int size_a = get_stack_size(stack_a);
+    int i = 0;
+
+    while (i < size_a)
+    {
+        int cost_a = calculate_cost_to_top(stack_a, current->index);
+        int target_pos = find_target_position(stack_b, current->value);
+        int cost_b = calculate_cost_to_top(stack_b, target_pos);
+        costs[i] = cost_a + cost_b;
+        current = current->next;
+        i++;
+    }
+}
+
+int find_cheapest_element(int *costs, int size)
+{
+    int min_cost = costs[0];
+    int min_index = 0;
+
+    for (int i = 1; i < size; i++)
+    {
+        if (costs[i] < min_cost)
+        {
+            min_cost = costs[i];
+            min_index = i;
+        }
+    }
+    return min_index;
+}
+
+void move_element_to_stack_b(t_node **stack_a, t_node **stack_b, int index)
+{
+    int size_a = get_stack_size(*stack_a);
+    int rotations = calculate_cost_to_top(*stack_a, index);
+
+    while (rotations > 0)
+    {
+        if (index <= size_a / 2)
+            ra(stack_a);
+        else
+            rra(stack_a);
+        rotations--;
+    }
+
+    int target_pos = find_target_position(*stack_b, (*stack_a)->value);
+    int size_b = get_stack_size(*stack_b);
+    rotations = calculate_cost_to_top(*stack_b, target_pos);
+
+    while (rotations > 0)
+    {
+        if (target_pos <= size_b / 2)
+            rb(stack_b);
+        else
+            rrb(stack_b);
+        rotations--;
+    }
+
+    pb(stack_a, stack_b);
+}
+
+void move_element_to_stack_b(t_node **stack_a, t_node **stack_b, int index)
+{
+    int size_a = get_stack_size(*stack_a);
+    int size_b = get_stack_size(*stack_b);
+
+    int rotations_a = calculate_cost_to_top(*stack_a, index);
+    int target_pos = find_target_position(*stack_b, (*stack_a)->value);
+    int rotations_b = calculate_cost_to_top(*stack_b, target_pos);
+
+    while (rotations_a > 0 || rotations_b > 0)
+    {
+        if (rotations_a > 0 && rotations_b > 0)
+        {
+            rr(stack_a, stack_b);
+            rotations_a--;
+            rotations_b--;
+        }
+        else if (rotations_a > 0)
+        {
+            ra(stack_a);
+            rotations_a--;
+        }
+        else if (rotations_b > 0)
+        {
+            rb(stack_b);
+            rotations_b--;
+        }
+    }
+
+    pb(stack_a, stack_b);
+}
+
+void push_all_to_stack_b(t_node **stack_a, t_node **stack_b)
+{
+    while (*stack_a)
+    {
+        int size_a = get_stack_size(*stack_a);
+        int costs[size_a];
+
+        calculate_costs(*stack_a, *stack_b, costs);
+        int cheapest_index = find_cheapest_element(costs, size_a);
+        move_element_to_stack_b(stack_a, stack_b, cheapest_index);
+    }
+}
+
+void push_all_to_stack_a(t_node **stack_a, t_node **stack_b)
+{
+    while (*stack_b)
+        pa(stack_a, stack_b);
+}

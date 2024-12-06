@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:07 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/06 15:29:47 by lbuisson         ###   ########.fr       */
+/*   Updated: 2024/12/06 16:03:49 by lbuisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,69 +160,12 @@ int	main(int argc, char **argv)
 		// ft_printf("\n\nsorted\n\n");
 		// print_stack(stack_a, 'a');
 	}
-	// if (get_stack_size(stack_a) >= 4)
-	// {
-	// 	sort_10(&stack_a, &stack_b, 10);
-	// 	ft_printf("\n\nsorted\n\n");
-	// 	print_stack(stack_a, 'a');
-	// }
-	// if (argc >= 5)
-	// {
-	// 	sort_4(&stack_a, &stack_b);
-	// 	ft_printf("\n\nsorted\n\n");
-	// 	print_stack(stack_a, 'a');
-	// 	ft_printf("\n\n");
-	// 	print_stack(stack_b, 'b');
-	// }
-	// if (argc >= 5)
-	// {
-	// 	sort_4(&stack_a, &stack_b);
-	// 	ft_printf("\n\nsorted\n\n");
-	// 	print_stack(stack_a, 'a');
-	// 	ft_printf("\n\n");
-	// 	print_stack(stack_b, 'b');
-	// }
-	// ft_printf("\n\nswap a\n\n");
-	// swap_a_and_b(&stack_a, &stack_b);
-	// print_stack(stack_a, 'a');
-	// ft_printf("\n\npush b\n\n");
-	// push_on_top(&stack_b, &stack_a);
-	// print_stack(stack_a, 'a');
-	// ft_printf("\n\n");
-	// print_stack(stack_b, 'b');
-	// ft_printf("\n\npush a\n\n");
-	// push_on_top(&stack_a, &stack_b);
-	// print_stack(stack_a, 'a');
-	// ft_printf("\n\n");
-	// print_stack(stack_b, 'b');
-	// ft_printf("\n\nrotate a\n\n");
-	// rotate_a_or_b(&stack_a);
-	// print_stack(stack_a, 'a');
-	// ft_printf("\n\nreverse a\n\n");
-	// reverse_a_or_b(&stack_a);
-	// print_stack(stack_a, 'a');
-	// ft_printf("\n\npartition\n\n");
-	// partition(&stack_a, &stack_b, stack_a->value, get_stack_size(stack_a));
-	// print_stack(stack_a, 'a');
-	// ft_printf("\n\n");
-	// print_stack(stack_b, 'b');
-	// ft_printf("\n\npartition\n\n");
-	// partition(&stack_b, &stack_a, stack_b->value, get_stack_size(stack_b));
-	// print_stack(stack_a, 'a');
-	// ft_printf("\n\n");
-	// print_stack(stack_b, 'b');
-	// quick_sort(&stack_a, &stack_b);
-	// quick_sort(&stack_a, &stack_b);
-	// quick_sort(&stack_a, &stack_b);
-	// quick_sort(&stack_a, &stack_b);
-	// quick_sort(&stack_a, &stack_b);
-	// printf("stack a = %d\n", stack_a->value);
-	// while (stack_a->prev)
-	// {
-	// 	printf("stack a prev = %d\n", stack_a->value);
-	// 	stack_a = stack_a->prev;
-	// }
-	// printf("stack a prev = %d\n", stack_a->value);
+	if (get_stack_size(stack_a) > 3)
+	{
+		sort_100(&stack_a, &stack_b);
+		// ft_printf("\n\nsorted\n\n");
+		// print_stack(stack_a, 'a');
+	}
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);
