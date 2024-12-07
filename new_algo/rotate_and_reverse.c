@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 08:43:31 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/06 15:07:27 by lbuisson         ###   ########.fr       */
+/*   Updated: 2024/12/07 11:08:38 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	rotate_a_or_b(t_node **stack, char c, int rr)
 	update_index(stack);
 }
 
-void	rotate_a_and_b(t_node **stack_a, t_node **stack_b, int rr)
+void	rotate_a_and_b(t_node **stack_a, t_node **stack_b)
 {
 	ft_printf("rr\n");
 	rotate_a_or_b(stack_a, 'a', 1);

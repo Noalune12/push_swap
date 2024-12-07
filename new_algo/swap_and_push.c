@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 08:43:02 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/06 15:18:32 by lbuisson         ###   ########.fr       */
+/*   Updated: 2024/12/07 11:15:03 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ void	push_on_top(t_node **stack_push, t_node **stack_pull, char c)
 
 	if (!stack_pull || !*stack_pull)
 		return ;
+	if (c == 'a')
+		ft_printf("pa\n");
+	else
+		ft_printf("pb\n");
 	top_pull = *stack_pull;
 	if (top_pull->next == top_pull)
 		*stack_pull = NULL;
