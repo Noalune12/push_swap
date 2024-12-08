@@ -1,121 +1,6 @@
 #include "push_swap.h"
-// calculer le coût d'une rotation->
-// renvoyer index si index >= size / 2 ==> ca veut dire qu'on rot en ra
-// sinon size - index (rra)
 
-int find_min_index(t_node *stack)
-{
-	t_node	*current;
-	int		min_value;
-	int		min_index;
-
-	if (!stack)
-		return -1;
-	current = stack;
-	min_value = current->value;
-	min_index = current->index;
-	while (current->next != stack)
-	{
-		current = current->next;
-		if (current->value < min_value)
-		{
-			min_value = current->value;
-			min_index = current->index;
-		}
-	}
-	if (current->value < min_value)
-	{
-		min_value = current->value;
-		min_index = current->index;
-	}
-	return (min_index);
-}
-
-int get_min(t_node *stack)
-{
-	t_node	*current;
-	int		min_value;
-	int		min_index;
-
-	if (!stack)
-		return -1;
-	current = stack;
-	min_value = current->value;
-	min_index = current->index;
-	while (current->next != stack)
-	{
-		current = current->next;
-		if (current->value < min_value)
-		{
-			min_value = current->value;
-			min_index = current->index;
-		}
-	}
-	if (current->value < min_value)
-	{
-		min_value = current->value;
-		min_index = current->index;
-	}
-	return (min_value);
-}
-
-int find_max_index(t_node *stack)
-{
-	t_node	*current;
-	int		max_value;
-	int		max_index;
-
-	if (!stack)
-		return (-1);
-	current = stack;
-	max_value = current->value;
-	max_index = current->index;
-	while (current->next != stack)
-	{
-		current = current->next;
-		if (current->value > max_value)
-		{
-			max_value = current->value;
-			max_index = current->index;
-		}
-	}
-	if (current->value > max_value)
-	{
-		max_value = current->value;
-		max_index = current->index;
-	}
-	return (max_index);
-}
-
-int	get_max(t_node *stack)
-{
-	t_node	*current;
-	int		max_value;
-	int		max_index;
-
-	if (!stack)
-		return (-1);
-	current = stack;
-	max_value = current->value;
-	max_index = current->index;
-	while (current->next != stack)
-	{
-		current = current->next;
-		if (current->value > max_value)
-		{
-			max_value = current->value;
-			max_index = current->index;
-		}
-	}
-	if (current->value > max_value)
-	{
-		max_value = current->value;
-		max_index = current->index;
-	}
-	return (max_value);
-}
-
-int	cost_to_top(t_node *stack, int index)
+int	cost_to_top_a(t_node *stack, int index)
 {
 	int	size;
 
@@ -150,7 +35,6 @@ int	find_position_b(t_node *stack, int value)
 	int		max;
 
 	min = get_min(stack);
-	// printf("min = %d, index = %d\n\n", min, find_min_index(stack));
 	max = get_max(stack);
 	if (value < min)
 		return (find_max_index(stack));
@@ -380,6 +264,48 @@ void	rotate_or_reverse(t_node **stack_a, t_node **stack_b, int cheapest_index, i
 			}
 		}
 	}
+	if (r_or_rr == 2) //ra and rrb
+	{
+		ra = cheapest_index;
+		value = get_value(*stack_a, cheapest_index);
+		target_pos = find_position_b(*stack_b, value);
+		if (target_pos == get_stack_size(*stack_b))
+			rb = 0;
+		else
+			rb = get_stack_size(*stack_b) - target_pos;
+		while (ra)
+		{
+			rotate_a_or_b(stack_a, 'a', 0);
+			ra--;
+		}
+		// printf("rb = %d, target pos = %d", rb, target_pos);
+		while (rb)
+		{
+			reverse_a_or_b(stack_b, 'b', 0);
+			rb--;
+		}
+	}
+	if (r_or_rr == -2) //rra and rb
+	{
+		ra = get_stack_size(*stack_a) - cheapest_index;
+		value = get_value(*stack_a, cheapest_index);
+		target_pos = find_position_b(*stack_b, value);
+		if (target_pos == get_stack_size(*stack_b))
+			rb = 0;
+		else
+			rb = target_pos;
+		while (ra)
+		{
+			reverse_a_or_b(stack_a, 'a', 0);
+			ra--;
+		}
+		// printf("rb = %d, target pos = %d", rb, target_pos);
+		while (rb)
+		{
+			rotate_a_or_b(stack_b, 'b', 0);
+			rb--;
+		}
+	}
 	push_on_top(stack_b, stack_a, 'b');
 }
 
@@ -472,7 +398,8 @@ void	sort_100(t_node **stack_a, t_node **stack_b)
 
 	//condition is sorted return
 	push_on_top(stack_b, stack_a, 'b');
-	push_on_top(stack_b, stack_a, 'b');
+	if (get_stack_size(*stack_a) > 4)
+		push_on_top(stack_b, stack_a, 'b');
 	// printf("\n\npb x2\n\n");
 	// print_stack(*stack_a, 'a');
 	// printf("\n\n");
@@ -480,6 +407,7 @@ void	sort_100(t_node **stack_a, t_node **stack_b)
 	// printf("\n\n");
 
 	//check cost to top
+	int	rrrrr = 0;
 	while (get_stack_size(*stack_a) > 3)
 	{
 		temp_a = *stack_a;
@@ -501,6 +429,8 @@ void	sort_100(t_node **stack_a, t_node **stack_b)
 		// printf("\n\n");
 		// print_stack(*stack_b, 'b');
 		// printf("\n\n");
+		if (r_or_rr[0] == 2 || r_or_rr[0] == -2)
+			rrrrr++;
 		free(costs);
 		free(r_or_rr);
 	}
@@ -520,6 +450,7 @@ void	sort_100(t_node **stack_a, t_node **stack_b)
 	// printf("\n\n");
 
 	check_sorted(stack_a);
+	// printf("case with 2 and -2 = %d", rrrrr);
 	// printf("\n\nsorted\n\n");
 	// print_stack(*stack_a, 'a');
 	// printf("\n\n");
