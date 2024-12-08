@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 08:43:31 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/07 11:08:38 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/08 11:39:28 by lbuisson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	rotate_a_or_b(t_node **stack, char c, int rr)
 		ft_printf("ra\n");
 	else if (c == 'b' && rr == 0)
 		ft_printf("rb\n");
-	(* stack) = (*stack)->next;
+	(*stack) = (*stack)->next;
 	update_index(stack);
 }
 
@@ -34,16 +34,13 @@ void	rotate_a_and_b(t_node **stack_a, t_node **stack_b)
 
 void	reverse_a_or_b(t_node **stack, char c, int rrr)
 {
-	t_node	*temp;
-	t_node	*temp2;
-
 	if (!stack || !*stack || (*stack)->next == *stack)
 		return ;
 	if (c == 'a' && rrr == 0)
 		ft_printf("rra\n");
 	else if (c == 'b' && rrr == 0)
 		ft_printf("rrb\n");
-	(* stack) = (*stack)->prev;
+	(*stack) = (*stack)->prev;
 	update_index(stack);
 }
 

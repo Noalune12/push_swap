@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_2_and_3.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/08 11:01:17 by lbuisson          #+#    #+#             */
+/*   Updated: 2024/12/08 11:01:18 by lbuisson         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	sort_2(t_node **stack)
@@ -7,22 +19,6 @@ void	sort_2(t_node **stack)
 	temp = (*stack)->next;
 	if ((*stack)->value > temp->value)
 		swap_a_or_b(stack, 'a', 0);
-}
-
-int	is_sorted(t_node *stack)
-{
-	t_node	*current;
-
-	if (!stack || stack->next == stack)
-		return (1);
-	current = stack;
-	while (current->next != stack)
-	{
-		if (current->value > current->next->value)
-			return (-1);
-		current = current->next;
-	}
-	return (1);
 }
 
 void	sort_3(t_node **stack_a)

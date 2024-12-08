@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/08 11:01:55 by lbuisson          #+#    #+#             */
+/*   Updated: 2024/12/08 11:37:44 by lbuisson         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include "libft/libft.h"
 #include "libft/ft_printf/ft_printf.h"
 
-static void	free_stack(t_node **stack)
+static void	free_stack_error(t_node **stack)
 {
 	t_node	*temp;
 	t_node	*temp2;
@@ -33,10 +45,25 @@ static int	check_double(t_node *stack_a, int nb)
 	return (1);
 }
 
+static int	handle_conversion(char *str, size_t *index, long *res, int sign)
+{
+	while (str[*index] >= '0' && str[*index] <= '9')
+	{
+		if (*res > (LONG_MAX - (str[*index] - '0')) / 10)
+			return (-1);
+		*res = *res * 10 + (str[*index] - '0');
+		if (*res * sign < INT_MIN || *res * sign > INT_MAX)
+			return (-1);
+		(*index)++;
+	}
+	return (0);
+}
+
 static int	validate_and_convert(char *str, size_t *index, t_node **stack_a)
 {
 	long	res;
 	int		sign;
+	int		ret;
 
 	res = 0;
 	sign = 1;
@@ -48,59 +75,41 @@ static int	validate_and_convert(char *str, size_t *index, t_node **stack_a)
 	}
 	if (!(str[*index] >= '0' && str[*index] <= '9'))
 		return (-1);
-	while (str[*index] >= '0' && str[*index] <= '9')
-	{
-		res = res * 10 + (str[*index] - '0');
-		if (res * sign < INT_MIN || res * sign > INT_MAX)
-			return (-1);
-		(*index)++;
-	}
+	if (handle_conversion(str, index, &res, sign) == -1)
+		return (-1);
 	res *= sign;
 	if (check_double(*stack_a, res) == -1)
 		return (-1);
-	push_stack(stack_a, res);
-	return (1);
-}
-
-static int	check_int(char *str, t_node **stack_a)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-	{
-		while (str[i] == ' ')
-			i++;
-		if (str[i] && validate_and_convert(str, &i, stack_a) != 1)
-			return (-1);
-		if (str[i] && str[i] != ' ')
-			return (-1);
-	}
+	ret = push_stack(stack_a, res);
+	if (ret == -1)
+		return (-1);
 	return (1);
 }
 
 int	check_error(int ac, char **av, t_node **stack_a)
 {
-	size_t	i;
+	int		i;
+	size_t	j;
 
 	i = 0;
 	while (++i < ac)
 	{
-		if (check_int(av[i], stack_a) != 1)
+		j = 0;
+		while (av[i][j])
 		{
-			free_stack(stack_a);
-			return (-1);
+			while (av[i][j] == ' ')
+				j++;
+			if (av[i][j] && validate_and_convert(av[i], &j, stack_a) != 1)
+			{
+				free_stack_error(stack_a);
+				return (-1);
+			}
+			if (av[i][j] && av[i][j] != ' ')
+			{
+				free_stack_error(stack_a);
+				return (-1);
+			}
 		}
 	}
 	return (1);
 }
-
-// int	check_args(int ac, char **av, t_node **stack_a)
-// {
-// 	if (check_error(ac, av, stack_a) != 1)
-// 	{
-// 		free_stack(stack_a);
-// 		return (-1);
-// 	}
-// 	return (1);
-// }
