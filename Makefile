@@ -6,11 +6,15 @@ NAME = push_swap
 
 RM = rm -f
 
+SRCS_DIR = ./srcs
+
 SRCS = algo_2_and_3.c algo_500.c algo_500_r_or_rr.c calculate_cost.c \
 	check_args.c find_position.c min_and_max.c push_on_top.c push_swap_utils.c \
 	push_swap.c rotate_and_reverse.c swap.c
 
-OBJS = $(SRCS:.c=.o)
+SRCS_FILES = $(addprefix $(SRCS_DIR)/, $(SRCS))
+
+OBJS = $(SRCS_FILES:.c=.o)
 
 LIBFT_DIR = ./libft
 
@@ -33,7 +37,7 @@ $(NAME) : $(OBJS) $(LIBFT_FILES)
 	make -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME)
 
-%.o: %.c push_swap.h Makefile
+%.o: %.c include/push_swap.h Makefile
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT_DIR)
 
 clean:
