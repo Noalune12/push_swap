@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:02:16 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/08 11:03:51 by lbuisson         ###   ########.fr       */
+/*   Updated: 2024/12/09 08:33:52 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	find_min_index(t_node *stack)
 	int		min_value;
 	int		min_index;
 
-	if (!stack)
-		return (-1);
 	current = stack;
 	min_value = current->value;
 	min_index = current->index;
@@ -43,23 +41,13 @@ int	find_min_index(t_node *stack)
 int	get_min(t_node *stack)
 {
 	t_node	*current;
-	int		min_value;
+	int		min_index;
 
-	if (!stack)
-		return (-1);
+	min_index = find_min_index(stack);
 	current = stack;
-	min_value = current->value;
-	while (current->next != stack)
-	{
+	while (current->index != min_index)
 		current = current->next;
-		if (current->value < min_value)
-			min_value = current->value;
-	}
-	if (current->value < min_value)
-	{
-		min_value = current->value;
-	}
-	return (min_value);
+	return (current->value);
 }
 
 int	find_max_index(t_node *stack)
@@ -68,8 +56,6 @@ int	find_max_index(t_node *stack)
 	int		max_value;
 	int		max_index;
 
-	if (!stack)
-		return (-1);
 	current = stack;
 	max_value = current->value;
 	max_index = current->index;
@@ -93,21 +79,12 @@ int	find_max_index(t_node *stack)
 int	get_max(t_node *stack)
 {
 	t_node	*current;
-	int		max_value;
+	int		max_index;
 
-	if (!stack)
-		return (-1);
 	current = stack;
-	max_value = current->value;
-	while (current->next != stack)
-	{
+	max_index = find_max_index(stack);
+	current = stack;
+	while (current->index != max_index)
 		current = current->next;
-		if (current->value > max_value)
-			max_value = current->value;
-	}
-	if (current->value > max_value)
-	{
-		max_value = current->value;
-	}
-	return (max_value);
+	return (current->value);
 }

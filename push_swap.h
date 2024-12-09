@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:18 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/08 11:38:32 by lbuisson         ###   ########.fr       */
+/*   Updated: 2024/12/09 08:01:22 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	update_index(t_node **stack);
 
 void	sort_3(t_node **stack_a);
 void	sort_2(t_node **stack);
-void	sort_100(t_node **stack_a, t_node **stack_b);
+int		sort_500(t_node **stack_a, t_node **stack_b);
 
 int		find_min_index(t_node *stack);
 int		get_min(t_node *stack);

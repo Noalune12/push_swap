@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algo_100_r_or_rr.c                                 :+:      :+:    :+:   */
+/*   algo_500_r_or_rr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:13:32 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/08 10:57:51 by lbuisson         ###   ########.fr       */
+/*   Updated: 2024/12/09 08:59:30 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	only_rotate(t_node **stack_a, t_node **stack_b,
 	int	rb;
 
 	ra = cheapest_index;
-	if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
-		rb = 0;
-	else
+	// if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
+	// 	rb = 0;
+	// else
 		rb = find_position_b(*stack_b, value);
 	while (ra && rb)
 	{
@@ -51,9 +51,9 @@ static void	only_reverse(t_node **stack_a, t_node **stack_b,
 	int	rrb;
 
 	rra = get_stack_size(*stack_a) - cheapest_index;
-	if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
-		rrb = 0;
-	else
+	// if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
+	// 	rrb = 0;
+	// else
 		rrb = get_stack_size(*stack_b) - find_position_b(*stack_b, value);
 	while (rra && rrb)
 	{
@@ -80,9 +80,9 @@ static void	rotate_a_reverse_b(t_node **stack_a, t_node **stack_b,
 	int	rrb;
 
 	ra = cheapest_index;
-	if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
-		rrb = 0;
-	else
+	// if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
+	// 	rrb = 0;
+	// else
 		rrb = get_stack_size(*stack_b) - find_position_b(*stack_b, value);
 	while (ra)
 	{
@@ -103,9 +103,9 @@ static void	reverse_a_rotate_b(t_node **stack_a, t_node **stack_b,
 	int	rb;
 
 	rra = get_stack_size(*stack_a) - cheapest_index;
-	if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
-		rb = 0;
-	else
+	// if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
+	// 	rb = 0;
+	// else
 		rb = find_position_b(*stack_b, value);
 	while (rra)
 	{

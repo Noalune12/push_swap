@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algo_100.c                                         :+:      :+:    :+:   */
+/*   algo_500.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:34:54 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/08 10:55:09 by lbuisson         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:05:33 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	check_sorted(t_node **stack_a)
 	}
 }
 
-static void	sort_a_to_b(t_node **stack_a, t_node **stack_b)
+static int	sort_a_to_b(t_node **stack_a, t_node **stack_b)
 {
 	int		*costs;
 	int		*r_or_rr;
@@ -86,14 +86,14 @@ static void	sort_a_to_b(t_node **stack_a, t_node **stack_b)
 	{
 		free_stack(stack_a);
 		free_stack(stack_b);
-		return ;
+		return (-1);
 	}
 	r_or_rr = (int *)malloc(get_stack_size(*stack_a) * sizeof(int));
 	if (!r_or_rr)
 	{
 		free_stack(stack_a);
 		free_stack(stack_b);
-		return ;
+		return (-1);
 	}
 	calculate_cost(*stack_a, *stack_b, costs, r_or_rr);
 	cheapest_index = find_cheapest_element(costs, get_stack_size(*stack_a));
@@ -101,17 +101,28 @@ static void	sort_a_to_b(t_node **stack_a, t_node **stack_b)
 		r_or_rr[cheapest_index]);
 	free(costs);
 	free(r_or_rr);
+	return (0);
 }
 
-void	sort_100(t_node **stack_a, t_node **stack_b)
+int	sort_500(t_node **stack_a, t_node **stack_b)
 {
+	int	ret;
+
+	if (is_sorted(*stack_a) == 1)
+		return (0);
 	push_on_top(stack_b, stack_a, 'b');
 	if (get_stack_size(*stack_a) > 4)
 		push_on_top(stack_b, stack_a, 'b');
-	while (get_stack_size(*stack_a) > 3)
-		sort_a_to_b(stack_a, stack_b);
-	sort_3(stack_a);
+	while (get_stack_size(*stack_a) > 3 && is_sorted(*stack_a) == -1)
+	{
+		ret = sort_a_to_b(stack_a, stack_b);
+		if (ret == -1)
+			return (-1);
+	}
+	if (get_stack_size(*stack_a) == 3)
+		sort_3(stack_a);
 	while (*stack_b)
 		push_back(stack_a, stack_b, (*stack_b)->value);
 	check_sorted(stack_a);
+	return (0);
 }

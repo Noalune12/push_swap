@@ -6,35 +6,12 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:07 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/08 11:21:37 by lbuisson         ###   ########.fr       */
+/*   Updated: 2024/12/09 08:53:53 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
-//delete
-#include "libft/ft_printf/ft_printf.h"
-
-void	print_stack(t_node *stack, char c)
-{
-	t_node	*temp;
-
-	temp = stack;
-	if (!temp)
-	{
-		ft_printf("STACK %c NULL", c);
-		return ;
-	}
-	ft_printf("stack %c = %d && index = %d // prev : %p, next : %p\n",
-		c, temp->value, temp->index, temp->prev, temp->next);
-	temp = temp->next;
-	while (temp->index != 0)
-	{
-		ft_printf("stack %c = %d && index = %d // prev : %p, next : %p\n",
-			c, temp->value, temp->index, temp->prev, temp->next);
-		temp = temp->next;
-	}
-}
 
 int	free_stack(t_node **stack)
 {
@@ -105,10 +82,32 @@ void	update_prev_next(t_node **stack)
 	(*stack)->prev = temp;
 }
 
+static int	sort_stack(t_node **stack_a, t_node **stack_b)
+{
+	int		ret;
+
+	if (get_stack_size(*stack_a) == 2)
+		sort_2(stack_a);
+	else if (get_stack_size(*stack_a) == 3)
+		sort_3(stack_a);
+	else if (get_stack_size(*stack_a) > 3)
+	{
+		ret = sort_500(stack_a, stack_b);
+		if (ret == -1)
+		{
+			free_stack(stack_a);
+			free_stack(stack_b);
+			return (-1);
+		}
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_node	*stack_a;
 	t_node	*stack_b;
+	int		ret;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -120,12 +119,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	update_prev_next(&stack_a);
-	if (get_stack_size(stack_a) == 2)
-		sort_2(&stack_a);
-	else if (get_stack_size(stack_a) == 3)
-		sort_3(&stack_a);
-	if (get_stack_size(stack_a) > 3)
-		sort_100(&stack_a, &stack_b);
+	ret = sort_500(&stack_a, &stack_b);
+	if (ret == -1)
+		return (1);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);
