@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:13:32 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/09 08:59:30 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/09 10:17:55 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ static void	only_rotate(t_node **stack_a, t_node **stack_b,
 	int	rb;
 
 	ra = cheapest_index;
-	// if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
-	// 	rb = 0;
-	// else
-		rb = find_position_b(*stack_b, value);
+	rb = find_position_b(*stack_b, value);
 	while (ra && rb)
 	{
 		rotate_a_and_b(stack_a, stack_b);
@@ -51,10 +48,7 @@ static void	only_reverse(t_node **stack_a, t_node **stack_b,
 	int	rrb;
 
 	rra = get_stack_size(*stack_a) - cheapest_index;
-	// if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
-	// 	rrb = 0;
-	// else
-		rrb = get_stack_size(*stack_b) - find_position_b(*stack_b, value);
+	rrb = get_stack_size(*stack_b) - find_position_b(*stack_b, value);
 	while (rra && rrb)
 	{
 		reverse_a_and_b(stack_a, stack_b);
@@ -80,10 +74,7 @@ static void	rotate_a_reverse_b(t_node **stack_a, t_node **stack_b,
 	int	rrb;
 
 	ra = cheapest_index;
-	// if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
-	// 	rrb = 0;
-	// else
-		rrb = get_stack_size(*stack_b) - find_position_b(*stack_b, value);
+	rrb = get_stack_size(*stack_b) - find_position_b(*stack_b, value);
 	while (ra)
 	{
 		rotate_a_or_b(stack_a, 'a', 0);
@@ -103,10 +94,7 @@ static void	reverse_a_rotate_b(t_node **stack_a, t_node **stack_b,
 	int	rb;
 
 	rra = get_stack_size(*stack_a) - cheapest_index;
-	// if (find_position_b(*stack_b, value) == get_stack_size(*stack_b))
-	// 	rb = 0;
-	// else
-		rb = find_position_b(*stack_b, value);
+	rb = find_position_b(*stack_b, value);
 	while (rra)
 	{
 		reverse_a_or_b(stack_a, 'a', 0);

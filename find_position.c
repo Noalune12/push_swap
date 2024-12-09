@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:02:08 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/09 09:40:43 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/09 10:18:05 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	find_position_a(t_node *stack, int value)
 	while (position < size)
 	{
 		if (current->value > value && current->prev->value < value)
-				return (position);
+			return (position);
 		position++;
 		current = current->next;
 	}
@@ -47,7 +47,7 @@ int	find_position_b(t_node *stack, int value)
 	while (position < size)
 	{
 		if (current->value < value && current->prev->value > value)
-				return (position);
+			return (position);
 		position++;
 		current = current->next;
 	}

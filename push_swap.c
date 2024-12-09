@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:29:07 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/09 08:53:53 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/09 10:24:19 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	update_prev_next(&stack_a);
-	ret = sort_500(&stack_a, &stack_b);
+	ret = sort_stack(&stack_a, &stack_b);
 	if (ret == -1)
 		return (1);
 	free_stack(&stack_a);

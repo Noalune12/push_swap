@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbuisson <lbuisson@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 08:31:01 by lbuisson          #+#    #+#              #
-#    Updated: 2024/12/02 12:32:13 by lbuisson         ###   ########.fr        #
+#    Updated: 2024/12/09 10:38:42 by lbuisson         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -c
+CFLAGS = -Wall -Werror -Wextra
 
 NAME = libft.a
 
