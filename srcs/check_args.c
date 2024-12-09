@@ -6,13 +6,12 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:01:55 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/09 12:42:00 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/09 14:06:50 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include "../libft/libft.h"
-#include "../libft/ft_printf/ft_printf.h"
+#include <limits.h>
 
 static int	free_stack_error(t_node **stack)
 {
