@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:01:55 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/09 11:00:23 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/09 12:42:00 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "../libft/libft.h"
 #include "../libft/ft_printf/ft_printf.h"
 
-static void	free_stack_error(t_node **stack)
+static int	free_stack_error(t_node **stack)
 {
 	t_node	*temp;
 	t_node	*temp2;
 
 	if (!stack || !*stack)
-		return ;
+		return (-1);
 	temp = *stack;
 	while (temp)
 	{
@@ -29,6 +29,7 @@ static void	free_stack_error(t_node **stack)
 		temp = temp2;
 	}
 	*stack = NULL;
+	return (-1);
 }
 
 static int	check_double(t_node *stack_a, int nb)
@@ -39,10 +40,10 @@ static int	check_double(t_node *stack_a, int nb)
 	while (temp)
 	{
 		if (temp->value == nb)
-			return (-1);
+			return (1);
 		temp = temp->next;
 	}
-	return (1);
+	return (-1);
 }
 
 static int	handle_conversion(char *str, size_t *index, long *res, int sign)
@@ -78,7 +79,7 @@ static int	validate_and_convert(char *str, size_t *index, t_node **stack_a)
 	if (handle_conversion(str, index, &res, sign) == -1)
 		return (-1);
 	res *= sign;
-	if (check_double(*stack_a, res) == -1)
+	if (check_double(*stack_a, res) == 1)
 		return (-1);
 	ret = push_stack(stack_a, res);
 	if (ret == -1)
@@ -95,20 +96,16 @@ int	check_error(int ac, char **av, t_node **stack_a)
 	while (++i < ac)
 	{
 		j = 0;
+		if (!av[i][j])
+			return (free_stack_error(stack_a));
 		while (av[i][j])
 		{
 			while (av[i][j] == ' ')
 				j++;
 			if (av[i][j] && validate_and_convert(av[i], &j, stack_a) != 1)
-			{
-				free_stack_error(stack_a);
-				return (-1);
-			}
+				return (free_stack_error(stack_a));
 			if (av[i][j] && av[i][j] != ' ')
-			{
-				free_stack_error(stack_a);
-				return (-1);
-			}
+				return (free_stack_error(stack_a));
 		}
 	}
 	return (1);

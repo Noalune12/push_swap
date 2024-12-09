@@ -6,7 +6,7 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 10:06:40 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/09 11:00:11 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/09 11:57:52 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,8 @@ void	calculate_cost(t_node *stack_a, t_node *stack_b,
 		costs_a_b[0][0] = current->index;
 		costs_a_b[0][1] = get_stack_size(stack_a) - current->index;
 		target_pos = find_position_b(stack_b, current->value);
-		if (target_pos == get_stack_size(stack_b))
-		{
-			costs_a_b[1][0] = 0;
-			costs_a_b[1][1] = 0;
-		}
-		else
-		{
-			costs_a_b[1][0] = target_pos;
-			costs_a_b[1][1] = get_stack_size(stack_b) - target_pos;
-		}
+		costs_a_b[1][0] = target_pos;
+		costs_a_b[1][1] = get_stack_size(stack_b) - target_pos;
 		compare_cost(costs_a_b, &costs[i], &r_or_rr[i]);
 		current = current->next;
 	}

@@ -35,7 +35,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS) $(LIBFT_FILES)
 	make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME) -g
 
 %.o: %.c include/push_swap.h Makefile
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT_DIR)
