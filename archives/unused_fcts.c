@@ -6,11 +6,13 @@
 /*   By: lbuisson <lbuisson@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 11:40:14 by lbuisson          #+#    #+#             */
-/*   Updated: 2024/12/09 08:53:58 by lbuisson         ###   ########lyon.fr   */
+/*   Updated: 2024/12/09 10:13:52 by lbuisson         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+// ARG=""; ./a.out $ARG | ./checker_linux $ARG
+// ARG=""; ./a.out $ARG | wc -l
 //delete
 // #include "libft/ft_printf/ft_printf.h"
 
